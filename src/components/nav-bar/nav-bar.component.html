@@ -1,0 +1,92 @@
+<div class="header">
+  <div class="container">
+    <div class="navbar">
+      <div>
+        <img class="logo" src="https://seeklogo.com/images/K/kyrie-logo-FBB1AFC1E7-seeklogo.com.png" alt="Ảnh HTML">
+      </div>
+      <nav>
+        <ul>
+          @for(MenuItem of menuItems; track MenuItem.label)
+          {
+            <li><a href="{{MenuItem.link}}">{{MenuItem.label}}</a></li>
+          }
+        </ul>
+      </nav>
+      <button (click)="openDialog()">Add new shoes</button>
+      <img (click)="openCartDialog()" src="./assets/Cart.png" width="35px" height="35px">
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <h1>Give Your Sport <br> A New Style!</h1>
+        <p>Success isn't always about greatness. It's about consistency. Consistent<br>hard work gains
+          success. Greatness will come.</p>
+        <a href="" class="btn">Explore Now</a>
+      </div>
+      <div class="col-2">
+        <img class="theme" src="./assets/Theme.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<dialog #appDialog>
+  <body class="align">
+
+  <div class="grid">
+
+    <form [formGroup]="form" action="/" method="post" class="form login">
+
+      <header class="login__header">
+        <h3 class="login__title">Add new shoes</h3>
+      </header>
+
+      <div class="login__body">
+        <div class="form__field">
+          <input formControlName="id" type="text" placeholder="Id" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="img" type="text" placeholder="Product image" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="name" type="text" placeholder="Product name" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="description" type="text" placeholder="Description" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="stock" type="text" placeholder="Stock" required>
+        </div>
+        <div class="form__field">
+          <input formControlName="price" type="text" placeholder="Price" required>
+        </div>
+      </div>
+
+      <footer class="login__footer">
+        <input (click)="submit()" type="submit" value="Add new shoes">
+      </footer>
+
+    </form>
+
+  </div>
+
+  </body>
+</dialog>
+<dialog #cartDialog>
+  @for(item of itemsInCart; track item.id){
+
+    <img [src]="item.img" alt="item">
+    <div class="item-details">
+      <span class="name">name: {{ item.name }}</span>
+      <span class="quantity">quantity: {{ item.quantity }} </span>
+      <span class="description">description: {{ item.description }}</span>
+      <span class="price">${{ item.price }}</span>
+    </div>
+  }
+  <div class="total">
+    <span>TOTAL: ${{ total }}</span>
+  </div>
+</dialog>

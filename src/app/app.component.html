@@ -1,0 +1,2 @@
+<app-nav-bar [itemsInCart]="itemlistCart" (newItemEvent)="addItem($event)"></app-nav-bar>
+<app-shop [items]="ShopLists" (addToCartEvent)="addToCart($event)"></app-shop>
