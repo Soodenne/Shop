@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "shop-9d673": {
+      "hosting": {
+        "shop": [
+          "shop-9d673"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "shop-9d673"
+  }
+}

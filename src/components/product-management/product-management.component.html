@@ -1,8 +1,32 @@
 <body class="align">
 
-<div class="grid">
-
-  <form action="/" method="post" class="form login">
+  <div class="grid">
+    <div class="row">
+      @for(ShopList of productService.shopLists; track ShopList.id)
+      {
+        @if(ShopList.stock>0 && ShopList.price>0){
+          <div class="col-4">
+            <img [src]="ShopList.img" alt="">
+            <h4>{{ ShopList.name }}</h4>
+            <p>Description: {{ ShopList.description }}</p>
+            <p>Inventory quantity: {{ ShopList.stock }}</p>
+            <p>${{ShopList.price}}</p>
+              <button class="edit" (click)="openDialog(ShopList)" >
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+            </button>
+            <button (click)="delete(ShopList)" class="delete">
+              <span class="material-symbols-outlined">
+                delete
+              </span>
+            </button>
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <form [formGroup]="form" action="/" method="post" class="form login">
 
     <header class="login__header">
       <h3 class="login__title">Add new shoes</h3>
@@ -10,36 +34,80 @@
 
     <div class="login__body">
       <div class="form__field">
-        <input type="text" placeholder="Id" required>
+        <input formControlName="id" type="text" placeholder="Id" required>
       </div>
 
       <div class="form__field">
-        <input type="text" placeholder="Product image" required>
+        <input formControlName="img" type="text" placeholder="Product image" required>
       </div>
 
       <div class="form__field">
-        <input type="text" placeholder="Product name" required>
+        <input formControlName="name" type="text" placeholder="Product name" required>
       </div>
 
       <div class="form__field">
-        <input type="text" placeholder="Description" required>
+        <input formControlName="description" type="text" placeholder="Description" required>
       </div>
 
       <div class="form__field">
-        <input type="text" placeholder="Quantity" required>
+        <input formControlName="stock" type="text" placeholder="Stock" required>
       </div>
-
       <div class="form__field">
-        <input type="text" placeholder="Price" required>
+        <input formControlName="price" type="text" placeholder="Price" required>
       </div>
     </div>
 
     <footer class="login__footer">
-      <input type="submit" value="Add">
+      <input (click)="submit()" type="submit" value="Add new shoes">
     </footer>
 
   </form>
-
-</div>
-
 </body>
+
+<dialog #formup>
+  <body class="align">
+
+  <div class="grid">
+
+    <form [formGroup]="formupdate" action="/" method="post" class="form login">
+
+      <header class="login__header">
+        <h3 class="login__title">Edit shoes information</h3>
+      </header>
+
+      <div class="login__body">
+        <div class="form__field">
+          <input formControlName="id" readonly type="text" placeholder="Id" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="img" type="text" placeholder="Product image" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="name" type="text" placeholder="Product name" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="description" type="text" placeholder="Description" required>
+        </div>
+
+        <div class="form__field">
+          <input formControlName="stock" type="text" placeholder="Stock" required>
+        </div>
+        <div class="form__field">
+          <input formControlName="price" type="text" placeholder="Price" required>
+        </div>
+      </div>
+
+      <footer class="login__footer">
+        <input (click)="updateItem()" type="submit" value="Update">
+      </footer>
+
+    </form>
+
+  </div>
+
+  </body>
+</dialog>
+

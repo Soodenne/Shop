@@ -1,2 +1,5 @@
-<app-nav-bar [itemsInCart]="itemlistCart" (newItemEvent)="addItem($event)"></app-nav-bar>
-<app-shop [items]="ShopLists" (addToCartEvent)="addToCart($event)"></app-shop>
+<tui-root>
+<app-nav-bar></app-nav-bar>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+</tui-root>

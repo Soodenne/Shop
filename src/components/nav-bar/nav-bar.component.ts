@@ -1,6 +1,9 @@
 import {ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {ShopList} from "../shop/shop.component";
+import { ShopList } from '../../Model/products.model';
+import {SharedModule} from "../shared/shared.module";
+import {ProductService} from "../../services/product/product.service";
+import {Router} from "@angular/router";
 export interface MenuItem{
   label: string;
   link: string;
@@ -9,7 +12,7 @@ export interface MenuItem{
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    SharedModule
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
@@ -17,37 +20,17 @@ export interface MenuItem{
 export class NavBarComponent {
   menuItems : MenuItem[] = [
     { label: 'Home', link: '' },
-    { label: 'Product Management', link: 'ProductManagement' },
+    { label: 'Product Management', link: 'product-management' },
     { label: 'Add new Shoes', link: '' },
+    { label: 'Shoes detail', link: 'detail' },
   ];
-  @ViewChild('cartDialog', { static: true })
-  cartDialog!: ElementRef<HTMLDialogElement>;
-  cartCdr = inject(ChangeDetectorRef);
-  openCartDialog() {
-    this.pay();
-    Animation;
-    this.cartDialog.nativeElement.showModal();
-    this.cartCdr.detectChanges();
+  constructor(private router: Router,private productService: ProductService) {
   }
-
-  closeCartDialog() {
-    this.cartDialog.nativeElement.close();
-    this.cartCdr.detectChanges();
+  goToCart() {
+    this.productService.getCartList();
+    this.router.navigate(['/cart']);
   }
   @Output() newItemEvent = new EventEmitter<ShopList>();
-  @ViewChild('appDialog', { static: true })
-  dialog!: ElementRef<HTMLDialogElement>;
-  cdr = inject(ChangeDetectorRef);
-  openDialog() {
-    Animation;
-    this.dialog.nativeElement.showModal();
-    this.cdr.detectChanges();
-  }
-
-  closeDialog() {
-    this.dialog.nativeElement.close();
-    this.cdr.detectChanges();
-  }
 
   protected readonly open = open;
   form = new FormGroup({
@@ -60,26 +43,14 @@ export class NavBarComponent {
     img: new FormControl(''),
   });
 
-  submit() {
-    let newForm: ShopList = {
-      id: this.form.value.id || '',
-      stock: this.form.value.stock || 0,
-      name: this.form.value.name || '',
-      description: this.form.value.description || '',
-      price: this.form.value.price || 0,
-      img: this.form.value.img || '',
-      quantity: this.form.value.quantity || 0,
-    };
-    this.newItemEvent.emit(newForm);
-    this.closeDialog()
-  }
-  @Input() itemsInCart: ShopList[] = [];
-  // how to make total don't use fuction
-  total = 0;
-  pay() {
-    this.itemsInCart.forEach((item) => {
-      this.total += item.price * item.quantity;
-    });
-  }
+
+  // @Input() itemsInCart: ShopList[] = [];
+  // // how to make total don't use fuction
+  // total = 0;
+  // pay() {
+  //   this.itemsInCart.forEach((item) => {
+  //     this.total += item.price * item.quantity;
+  //   });
+  // }
 }
 
