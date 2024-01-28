@@ -6,12 +6,16 @@ import {TuiLabelModule, TuiTextfieldControllerModule} from "@taiga-ui/core";
 import {SharedModule} from "../shared/shared.module";
 import { ActivatedRoute } from '@angular/router';
 import {ProductService} from "../../services/product/product.service";
+import {NavBarComponent} from "../nav-bar/nav-bar.component";
+import {BreadcrumComponent} from "../breadcrum/breadcrum.component";
 @Component({
   selector: 'app-product-detail',
   standalone: true,
   imports: [
     SharedModule,
     TuiTextfieldControllerModule,
+    NavBarComponent,
+    BreadcrumComponent,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
@@ -19,7 +23,7 @@ import {ProductService} from "../../services/product/product.service";
 })
 export class ProductDetailComponent implements OnInit{
   product: any;
-  constructor(private activatedRoutes: ActivatedRoute, private productService: ProductService) {
+  constructor(private activatedRoutes: ActivatedRoute, public productService: ProductService) {
   }
   testForm = new FormGroup({
     testValue1: new FormControl(1, Validators.required),

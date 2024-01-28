@@ -1,27 +1,16 @@
-<div class="product-container">
-  <ul class="breadcrumbs">
-    <li>
-      <a href="#!" class="breadcrumbs__link">
-        Departments
-        <img src="./assets/icons/arrow-right.svg" alt="" />
-      </a>
-    </li>
-    <li>
-      <a href="#!" class="breadcrumbs__link">
-        Coffee
-        <img src="./assets/icons/arrow-right.svg" alt="" />
-      </a>
-    </li>
-    <li>
-      <a href="#!" class="breadcrumbs__link">
-        Coffee Beans
-        <img src="./assets/icons/arrow-right.svg" alt="" />
-      </a>
-    </li>
-    <li>
-      <a href="#!" class="breadcrumbs__link breadcrumbs__link--current"
-      >LavAzza</a
+<div class="breadcrumbs">
+  <tui-breadcrumbs
+    size="l"
+    class="tui-space_top-2"
+  >
+    <ng-container *ngFor="let item of items">
+      <a
+        *tuiItem
+        tuiLink
+        [routerLink]="item.routerLink"
       >
-    </li>
-  </ul>
+        {{ item.caption }}
+      </a>
+    </ng-container>
+  </tui-breadcrumbs>
 </div>

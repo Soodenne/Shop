@@ -3,13 +3,13 @@
     <div class="navbar">
       <div class="left-navbar">
         <img class="logo" src="https://seeklogo.com/images/K/kyrie-logo-FBB1AFC1E7-seeklogo.com.png" alt="Ảnh HTML">
-        <p class="name-shop">Kyrie Shoes</p>
+        <a href="" class="name-shop">Kyrie Shoes</a>
       </div>
       <nav>
         <ul>
           @for(MenuItem of menuItems; track MenuItem.label)
           {
-            <li><a class="page" href="{{MenuItem.link}}">{{MenuItem.label}}</a></li>
+            <li><a class="page" [routerLink]="MenuItem.link">{{MenuItem.label}}</a></li>
           }
         </ul>
       </nav>
@@ -17,19 +17,6 @@
       <a (click)=" goToCart()">
         <img class="img-cart" src="./assets/Cart.png" alt="Mô tả hình ảnh">
       </a>
-
-    </div>
-
-    <div class="row">
-      <div class="col-2">
-        <p class="concept">Give Your Sport <br> A New Style!</p>
-        <p class="below-concept">Success isn't always about greatness. It's about consistency. <br>Consistent hard work gains
-          success. Greatness will come.</p>
-        <a href="" class="btn">Explore Now</a>
-      </div>
-      <div class="col-2">
-        <img class="theme" src="./assets/Theme.jpg" alt="">
-      </div>
     </div>
   </div>
 </div>

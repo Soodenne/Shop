@@ -10,10 +10,11 @@ import {
   ViewChild
 } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {RouterLink, RouterLinkActive, RouterModule} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterModule} from "@angular/router";
 import {ProductService} from "../../services/product/product.service";
 import {ShopList} from "../../Model/products.model";
 import {SharedModule} from "../shared/shared.module";
+import {AuthService} from "../../services/auth/auth.service";
 
 let reactiveFormsModule = ReactiveFormsModule;
 
@@ -29,9 +30,11 @@ let reactiveFormsModule = ReactiveFormsModule;
   styleUrl: './shop.component.scss'
 })
 export class ShopComponent implements OnInit{
-  constructor(public productService:ProductService) {
+  constructor(public productService:ProductService, private authService: AuthService, private router: Router) {
 
   }
+
+
   ngOnInit(): void {
 
   }
@@ -72,6 +75,9 @@ export class ShopComponent implements OnInit{
     console.log(item);
   }
 
+  signOut(){
+    this.authService.signOut()
+  }
 
 }
 

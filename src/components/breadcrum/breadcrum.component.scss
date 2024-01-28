@@ -8,6 +8,19 @@
   padding: 20px;
   border-radius: 10px;
 
+  tui-breadcrumbs a {
+    color: gray; /* Đổi màu chữ thành màu xanh */
+    font-size: 16px; /* Đổi kích thước font chữ */
+  }
+
+  tui-breadcrumbs {
+    border-radius: 10px;
+    width: 100%;
+    background-color: #f0f0f0; /* Đổi màu nền */
+    padding: 10px; /* Thêm padding */
+  }
+
+
   background: #ffffff;
   box-shadow: 0px 20px 60px 10px rgba(237, 237, 246, 0.2);
 

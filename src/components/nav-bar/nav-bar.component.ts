@@ -3,7 +3,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import { ShopList } from '../../Model/products.model';
 import {SharedModule} from "../shared/shared.module";
 import {ProductService} from "../../services/product/product.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {AuthService} from "../../services/auth/auth.service";
 export interface MenuItem{
   label: string;
   link: string;
@@ -12,23 +13,23 @@ export interface MenuItem{
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
-    SharedModule
+    SharedModule,
+    RouterLink
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
   menuItems : MenuItem[] = [
-    { label: 'Home', link: '' },
-    { label: 'Product Management', link: 'product-management' },
-    { label: 'Add new Shoes', link: '' },
-    { label: 'Shoes detail', link: 'detail' },
+    { label: 'Home', link: '/layout/home' },
+    { label: 'Product Management', link: '/layout/product-management' },
+    // { label: 'Shoes detail', link: 'detail' },
   ];
-  constructor(private router: Router,private productService: ProductService) {
+  constructor(private router: Router,private productService: ProductService, private authService: AuthService) {
   }
   goToCart() {
     this.productService.getCartList();
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/layout/cart']);
   }
   @Output() newItemEvent = new EventEmitter<ShopList>();
 
@@ -39,10 +40,9 @@ export class NavBarComponent {
     name: new FormControl(''),
     description: new FormControl(''),
     price: new FormControl(0),
-    quantity: new FormControl(0),
+    quantity: new FormControl(1),
     img: new FormControl(''),
   });
-
 
   // @Input() itemsInCart: ShopList[] = [];
   // // how to make total don't use fuction

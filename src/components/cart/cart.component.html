@@ -1,21 +1,24 @@
 <div class="shoes">
+  @for(cartList of productService.cartList; track cartList.id)
+    {
   <div class="shoes-cart">
-    <img class="img-cart" src="./assets/Kyrie1.jpg" alt="">
+    <img class="img-cart" [src]="cartList.img" alt="">
     <div class="shoes-info">
       <div class="shoes-name-cost">
-        <h4 class="shoes-name">Nike kyrie 3</h4>
-        <p class="shoes-cost">$100.00</p>
+        <h4 class="shoes-name">{{ cartList.name }}</h4>
+        <p class="shoes-cost">${{cartList.price}}</p>
       </div>
       <form class="b-form" [formGroup]="testForm">
         <label tuiLabel="Quantity">
-          <tui-input-count formControlName="testValue1" tuiTextfieldSize="l" [max]="999999" [tuiTextfieldLabelOutside]="true"></tui-input-count>
+          <tui-input-count [readOnly]="true" tuiTextfieldSize="l" [max]="999999" [tuiTextfieldLabelOutside]="true">{{cartList.quantity}}</tui-input-count>
         </label>
       </form>
     </div>
   </div>
+    }
   <div class="below-shoes-cart">
-    <div class="continue-shop">
-                <span class="material-symbols-outlined">
+    <div class="continue-shop" >
+                <span class="material-symbols-outlined" routerLink="/layout/home">
                     arrow_back
                 </span>
       <p class=continue-txt>Continue Shopping</p>
@@ -24,16 +27,16 @@
       <div class="price">
         <div class="subtotal">
           <span>Subtotal: </span>
-          <span>$100</span>
+          <span>${{this.productService.totalBill()}}</span>
         </div>
         <div class="shipping">
           <span>Shipping: </span>
-          <span>$10</span>
+          <span>${{shipping}}</span>
         </div>
       </div>
       <div class="total">
         <span>Total: </span>
-        <span>$110</span>
+        <span>{{this.productService.totalBill() + shipping}}</span>
       </div>
     </div>
 

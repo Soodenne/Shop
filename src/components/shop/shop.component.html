@@ -1,7 +1,23 @@
+<div class="header">
+  <div class="container">
+<div class="row">
+  <div class="col-2">
+    <p class="concept">Give Your Sport <br> A New Style!</p>
+    <p class="below-concept">Success isn't always about greatness. It's about consistency. <br>Consistent hard work gains
+      success. Greatness will come.</p>
+    <a (click)="signOut()" class="btn">Explore Now</a>
+  </div>
+  <div class="col-2">
+    <img class="theme" src="./assets/Theme.jpg" alt="">
+  </div>
+</div>
+  </div>
+</div>
+
 <!-- featured categories -->
 <div class="categories" xmlns="http://www.w3.org/1999/html">
   <div class="small-container">
-    <div class="row">
+    <div class="row-mid">
 
       <div class="col-3">
         <img src="./assets/Kyrie-3-Hamsa-1.webp" alt="">
@@ -17,72 +33,39 @@
 </div>
 
 <!-- featured products -->
-<div class="small-container">
-  <h2 class="title">Featured Products</h2>
-  <div class="row">
-    @for(ShopList of productService.shopLists; track ShopList.id)
-    {
+  <h2 class="title-main">Featured Products</h2>
+  <div class="row-home">
+    @for (ShopList of productService.shopLists; track ShopList.id) {
       @if(ShopList.stock>0 && ShopList.price>0){
-        <div class="col-4" >
-          <img [src]="ShopList.img" alt="">
-          <h4 class="item-name">{{ ShopList.name }}</h4>
-          <p>Description: {{ ShopList.description }}</p>
+      <div class="item-card">
+        <a rel="noreferrer" size="l" target="_blank" tuiIsland [hoverable]="true">
+          <div class="img-home">
+            <img
+              alt="Taiga"
+              class="image-home"
+              [src]="ShopList.img"
+            />
+          </div>
+
+          <h2 class="title title_size_s">{{ ShopList.name }}</h2>
+          <p class="text">
+<!--            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+<!--            tempor incididunt ut labore et dolore magna aliqua-->
+            {{ ShopList.description }}
+          </p>
           <p>Inventory quantity: {{ ShopList.stock }}</p>
-          <p>${{ShopList.price}}</p>
-          <button class="cart" routerLink="/detail" [queryParams]="{ product: ShopList.id }" routerLinkActive>
-        <span class="material-symbols-outlined">
-          shopping_cart
-        </span>
-          </button>
-        </div>
-      }
+          <h2>${{ShopList.price}}</h2>
+          <button
+            icon="tuiIconSearch"
+            tuiIconButton
+            appearance="accent"
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+            routerLink="/layout/detail" [queryParams]="{ product: ShopList.id }" routerLinkActive
+          ></button>
+        </a>
+      </div>
+    }
     }
   </div>
-</div>
 
-<!--<dialog #formup>-->
-<!--  <body class="align">-->
-
-<!--  <div class="grid">-->
-
-<!--    <form [formGroup]="formupdate" action="/" method="post" class="form login">-->
-
-<!--      <header class="login__header">-->
-<!--        <h3 class="login__title">Add new shoes</h3>-->
-<!--      </header>-->
-
-<!--      <div class="login__body">-->
-<!--        <div class="form__field">-->
-<!--          <input formControlName="id" readonly type="text" placeholder="Id" required>-->
-<!--        </div>-->
-
-<!--        <div class="form__field">-->
-<!--          <input formControlName="img" type="text" placeholder="Product image" required>-->
-<!--        </div>-->
-
-<!--        <div class="form__field">-->
-<!--          <input formControlName="name" type="text" placeholder="Product name" required>-->
-<!--        </div>-->
-
-<!--        <div class="form__field">-->
-<!--          <input formControlName="description" type="text" placeholder="Description" required>-->
-<!--        </div>-->
-
-<!--        <div class="form__field">-->
-<!--          <input formControlName="stock" type="text" placeholder="Stock" required>-->
-<!--        </div>-->
-<!--        <div class="form__field">-->
-<!--          <input formControlName="price" type="text" placeholder="Price" required>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <footer class="login__footer">-->
-<!--        <input (click)="updateItem()" type="submit" value="Update">-->
-<!--      </footer>-->
-
-<!--    </form>-->
-
-<!--  </div>-->
-
-<!--  </body>-->
-<!--</dialog>-->
