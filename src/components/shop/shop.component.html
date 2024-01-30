@@ -36,7 +36,7 @@
   <h2 class="title-main">Featured Products</h2>
   <div class="row-home">
     @for (ShopList of productService.shopLists; track ShopList.id) {
-      @if(ShopList.stock>0 && ShopList.price>0){
+      <!-- @if(ShopList.stock>0 && ShopList.price>0){ -->
       <div class="item-card">
         <a rel="noreferrer" size="l" target="_blank" tuiIsland [hoverable]="true">
           <div class="img-home">
@@ -66,6 +66,6 @@
         </a>
       </div>
     }
-    }
+    <!-- } -->
   </div>
 

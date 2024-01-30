@@ -74,8 +74,8 @@ export class ProductService {
       this.cartList = [];
       snapshot.forEach((doc) => {
         this.cartList.push(doc.data() as ShopList);
-        console.log(doc.id, '=>', doc.data());
-        console.log(this.cartList);
+        // console.log(doc.id, '=>', doc.data());
+        // console.log(this.cartList);
       });
     });
   }
@@ -84,9 +84,11 @@ export class ProductService {
   constructor(private firestore: Firestore) {
     onSnapshot(collection(this.firestore, "products"), (collection) => {
       this.shopLists = [];
+
       collection.forEach((doc)=>{
         this.shopLists.push(doc.data() as any);
       })
+      console.log(this.shopLists);
     });
   }
   // async addToCart(item: ShopList) {
