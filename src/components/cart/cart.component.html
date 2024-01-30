@@ -1,5 +1,5 @@
 <div class="shoes">
-  @for(cartList of productService.cartList; track cartList.id)
+  @for(cartList of tempCartList; track cartList.id; let i = $index)
     {
   <div class="shoes-cart">
     <img class="img-cart" [src]="cartList.img" alt="">
@@ -8,11 +8,11 @@
         <h4 class="shoes-name">{{ cartList.name }}</h4>
         <p class="shoes-cost">${{cartList.price}}</p>
       </div>
-      <form class="b-form" [formGroup]="testForm">
+      <!-- <form class="b-form" [formGroup]="testForm">
         <label tuiLabel="Quantity">
           <tui-input-count [readOnly]="true" tuiTextfieldSize="l" [max]="999999" [tuiTextfieldLabelOutside]="true">{{cartList.quantity}}</tui-input-count>
         </label>
-      </form>
+      </form> -->
     </div>
   </div>
     }

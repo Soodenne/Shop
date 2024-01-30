@@ -31,12 +31,10 @@ let reactiveFormsModule = ReactiveFormsModule;
 })
 export class ShopComponent implements OnInit{
   constructor(public productService:ProductService, private authService: AuthService, private router: Router) {
-
   }
 
 
   ngOnInit(): void {
-
   }
 
   @ViewChild('formup', { static: true })
