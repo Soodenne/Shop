@@ -1,42 +1,45 @@
 <div class="shoes">
-  @for(cartList of productService.cartList; track cartList.id)
-    {
+  @for (cartList of tempCartList; track cartList.id; let i = $index) {
   <div class="shoes-cart">
     <img class="img-cart" [src]="cartList.img" alt="">
     <div class="shoes-info">
       <div class="shoes-name-cost">
         <h4 class="shoes-name">{{ cartList.name }}</h4>
-        <p class="shoes-cost">${{cartList.price}}</p>
+        <p class="shoes-cost">${{ cartList.price }}</p>
       </div>
-      <form class="b-form" [formGroup]="testForm">
+      <form class="b-form">
         <label tuiLabel="Quantity">
-          <tui-input-count [readOnly]="true" tuiTextfieldSize="l" [max]="999999" [tuiTextfieldLabelOutside]="true">{{cartList.quantity}}</tui-input-count>
+          <tui-input-count tuiTextfieldSize="l" [formControl]="this.quantityFormList[i]" [min]="1" [max]="999999"
+            [tuiTextfieldLabelOutside]="true">
+          </tui-input-count>
         </label>
+        <button appearance="secondary-destructive" icon="tuiIconTrashLarge" shape="rounded" size="s" title="Remove"
+          tuiIconButton type="button" class="remove" (click)="removeProduct(i)"></button>
       </form>
     </div>
   </div>
-    }
+  }
   <div class="below-shoes-cart">
-    <div class="continue-shop" >
-                <span class="material-symbols-outlined" routerLink="/layout/home">
-                    arrow_back
-                </span>
+    <div class="continue-shop">
+      <span class="material-symbols-outlined" routerLink="/layout/home">
+        arrow_back
+      </span>
       <p class=continue-txt>Continue Shopping</p>
     </div>
     <div class="total-price">
       <div class="price">
         <div class="subtotal">
           <span>Subtotal: </span>
-          <span>${{this.productService.totalBill()}}</span>
+          <span>${{ this.productService.totalBill() }}</span>
         </div>
         <div class="shipping">
           <span>Shipping: </span>
-          <span>${{shipping}}</span>
+          <span>${{ shipping }}</span>
         </div>
       </div>
       <div class="total">
         <span>Total: </span>
-        <span>{{this.productService.totalBill() + shipping}}</span>
+        <span>{{ this.productService.totalBill() + shipping }}</span>
       </div>
     </div>
 

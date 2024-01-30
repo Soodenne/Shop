@@ -1,16 +1,17 @@
 <div class="header">
   <div class="container">
-<div class="row">
-  <div class="col-2">
-    <p class="concept">Give Your Sport <br> A New Style!</p>
-    <p class="below-concept">Success isn't always about greatness. It's about consistency. <br>Consistent hard work gains
-      success. Greatness will come.</p>
-    <a (click)="signOut()" class="btn">Explore Now</a>
-  </div>
-  <div class="col-2">
-    <img class="theme" src="./assets/Theme.jpg" alt="">
-  </div>
-</div>
+    <div class="row">
+      <div class="col-2">
+        <p class="concept">Give Your Sport <br> A New Style!</p>
+        <p class="below-concept">Success isn't always about greatness. It's about consistency. <br>Consistent hard work
+          gains
+          success. Greatness will come.</p>
+        <a (click)="signOut()" class="btn">Explore Now</a>
+      </div>
+      <div class="col-2">
+        <img class="theme" src="./assets/Theme.jpg" alt="">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -33,39 +34,36 @@
 </div>
 
 <!-- featured products -->
-  <h2 class="title-main">Featured Products</h2>
-  <div class="row-home">
-    @for (ShopList of productService.shopLists; track ShopList.id) {
-      @if(ShopList.stock>0 && ShopList.price>0){
-      <div class="item-card">
-        <a rel="noreferrer" size="l" target="_blank" tuiIsland [hoverable]="true">
-          <div class="img-home">
-            <img
-              alt="Taiga"
-              class="image-home"
-              [src]="ShopList.img"
-            />
-          </div>
+<h2 class="title-main">Featured Products</h2>
+<div class="row-home">
+  @for (ShopList of productService.shopLists; track ShopList.id) {
 
-          <h2 class="title title_size_s">{{ ShopList.name }}</h2>
-          <p class="text">
-<!--            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-<!--            tempor incididunt ut labore et dolore magna aliqua-->
-            {{ ShopList.description }}
-          </p>
-          <p>Inventory quantity: {{ ShopList.stock }}</p>
-          <h2>${{ShopList.price}}</h2>
-          <button
-            icon="tuiIconSearch"
-            tuiIconButton
-            appearance="accent"
-            type="button"
-            class="tui-space_right-3 tui-space_bottom-3"
-            routerLink="/layout/detail" [queryParams]="{ product: ShopList.id }" routerLinkActive
-          ></button>
-        </a>
-      </div>
-    }
-    }
-  </div>
+    <div class="item-card">
+      <a rel="noreferrer" size="l" target="_blank" tuiIsland [hoverable]="true">
+        <div class="img-home">
+          <img
+            alt="Taiga"
+            class="image-home"
+            [src]="ShopList.img"
+          />
+        </div>
 
+        <h2 class="title title_size_s">{{ ShopList.name }}</h2>
+        <p class="text">
+
+          {{ ShopList.description }}
+        </p>
+        <p>Inventory quantity: {{ ShopList.stock }}</p>
+        <h2>${{ ShopList.price }}</h2>
+        <button
+          icon="tuiIconSearch"
+          tuiIconButton
+          appearance="accent"
+          type="button"
+          class="tui-space_right-3 tui-space_bottom-3"
+          routerLink="/layout/detail" [queryParams]="{ product: ShopList.id }" routerLinkActive
+        ></button>
+      </a>
+    </div>
+  }
+</div>

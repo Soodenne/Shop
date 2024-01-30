@@ -3,10 +3,10 @@
   <div class="shoes-detail">
     <img class="img-detail" [src]="product.img" alt="">
     <div class="shoes-info">
-      <h4 class="shoes-name">{{product.name}}</h4>
-      <p class="shoes-sold"><span class="sold-number">{{product.stock}}</span> Sold</p>
-      <p class="shoes-description">{{product.description}}</p>
-      <p class="shoes-cost">${{product.price}}</p>
+      <h4 class="shoes-name">{{ product.name }}</h4>
+      <p class="shoes-sold"><span class="sold-number">{{ product.stock }}</span> Sold</p>
+      <p class="shoes-description">{{ product.description }}</p>
+      <p class="shoes-cost">${{ product.price }}</p>
       <div class="delivery">
         <span class="material-symbols-outlined">
           shopping_cart
@@ -19,26 +19,22 @@
       <div>
         <div class="quantity-detail">
           <span class="material-symbols-outlined">
-          production_quantity_limits
-        </span>
+            production_quantity_limits
+          </span>
           <p class="quantity-txt">Quantity</p>
         </div>
         <form class="b-form" [formGroup]="testForm">
           <label>
-            <tui-input-count
-              formControlName="testValue1"
-              tuiTextfieldSize="m"
-              [max]="999999"
-            ></tui-input-count>
+            <tui-input-count formControlName="testValue1" tuiTextfieldSize="m" [max]="999999"></tui-input-count>
           </label>
         </form>
       </div>
-      <button class="btn-add-to-cart" (click)="this.productService.addItemToCart(product)">
+      <button class="btn-add-to-cart" (click)="addToCart(product)">
         <div class="inside-btn">
           <span class="material-symbols-outlined">
             add_shopping_cart
           </span>
-          <p  class="inside-txt">Add to cart</p>
+          <p class="inside-txt">Add to cart</p>
         </div>
       </button>
     </div>

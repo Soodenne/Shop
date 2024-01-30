@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import {ShopList} from "../../Model/products.model";
+import {Injectable} from '@angular/core';
 import {collection, deleteDoc, doc, Firestore, getDoc, onSnapshot, setDoc} from "@angular/fire/firestore";
 import firebase from "firebase/compat";
 import {DocumentData} from "@angular/fire/compat/firestore";
+import {ShopList} from "../../Model/products.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   cartList: ShopList[] = [];
-  shopLists : ShopList[] = [];
+  shopLists: ShopList[] = [];
   //   { id:'1', img:'./assets/Kyrie1.jpg',stock:12, name: 'Kyrie 1', description: 'Lorem ipsum',quantity: 1,price: 105.00 },
   //   { id:'2', img:'./assets/Kyrie1.jpg',stock:12, name: 'Kyrie 3', description: 'Lorem ipsum',quantity: 1,price: 105.00 },
   //   { id:'3', img:'./assets/Kyrie1.jpg',stock:12, name: 'Kyrie 2', description: 'Lorem ipsum',quantity: 1,price: 105.00 },
@@ -30,7 +30,7 @@ export class ProductService {
       if (productDocSnapshot.exists()) {
         const currentStock = productDocSnapshot.data()['stock'] || 0;
         if (currentStock > 0) {
-          await setDoc(productDocRef, { ...productDocSnapshot.data(), stock: currentStock - 1 });
+          await setDoc(productDocRef, {...productDocSnapshot.data(), stock: currentStock - 1});
           console.log("Đã giảm số lượng tồn kho của sản phẩm thành công!");
         } else {
           console.error("Sản phẩm này đã hết hàng!");
@@ -47,28 +47,32 @@ export class ProductService {
     }
   }
 
-
   async addItem(newItem: ShopList) {
-    await setDoc(doc(this.firestore, 'products', newItem.id.toString()),newItem);
+    await setDoc(doc(this.firestore, 'products', newItem.id.toString()), newItem);
   }
+
   async updateItem(newItem: ShopList) {
-    await setDoc(doc(this.firestore, 'products', newItem.id.toString()),newItem);
+    await setDoc(doc(this.firestore, 'products', newItem.id.toString()), newItem);
   }
-  async deleteItem(newItem: ShopList){
+
+  async deleteItem(newItem: ShopList) {
     await deleteDoc(doc(this.firestore, 'products', newItem.id.toString()));
     await deleteDoc(doc(this.firestore, 'cart', newItem.id.toString()));
   }
-  totalBill(){
+
+  totalBill() {
     let total = 0
-    for(let i = 0; i<this.cartList.length;i++){
+    for (let i = 0; i < this.cartList.length; i++) {
       total += this.cartList[i].price * this.cartList[i].quantity
     }
     return total
   }
+
   getItemById(id: string) {
     const product = this.shopLists.find((e) => e.id === id);
     return product || {};
   }
+
   async getCartList() {
     onSnapshot(collection(this.firestore, 'cart'), (snapshot) => {
       this.cartList = [];
@@ -81,14 +85,16 @@ export class ProductService {
   }
 
   itemlistCart: DocumentData[] = [];
+
   constructor(private firestore: Firestore) {
     onSnapshot(collection(this.firestore, "products"), (collection) => {
       this.shopLists = [];
-      collection.forEach((doc)=>{
+      collection.forEach((doc) => {
         this.shopLists.push(doc.data() as any);
       })
     });
   }
+
   // async addToCart(item: ShopList) {
   //   const docRef = doc(this.firestore, 'Shop', item.id.toString());
   //
