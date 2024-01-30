@@ -29,13 +29,13 @@ export const cartReducer = createReducer(
     if (isProductExist) {
       console.log("Sản phẩm đã tồn tại trong giỏ hàng.");
       productList.forEach((p) => {
-        if (p['id'] === product['id']) {
+        if (p.id === product.id) {
           p = {
             ...p,
             quantity: p.quantity + 1,
           };
           for (let i = 0; i < productList.length; i++) {
-            if (productList[i]['id'] == p['id']) {
+            if (productList[i].id == p.id) {
               productList[i] = p;
               console.log("Quantity mới của sản phẩm:", productList[i].quantity);
             }
@@ -64,13 +64,17 @@ export const cartReducer = createReducer(
   on(CartActions.updateCart, (state, action) => {
     let productList = [...state.cart.productList];
     let product = action.product;
-    productList.forEach((p) => {
+    console.log(product);
+    productList = productList.map((p) => {
       if (p.id === product.id) {
+        console.log('match');
         p = {
           ...p,
           quantity: product.quantity,
         };
+        return p;
       }
+      return p;
     });
     return {
       ...state,
