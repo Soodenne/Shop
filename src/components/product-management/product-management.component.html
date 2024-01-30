@@ -19,20 +19,18 @@
       <table tuiTable class="table" [columns]="columns" size="l">
         <thead>
           <tr tuiThGroup>
-        <th *tuiHead="'numberOf'" tuiTh [sorter]="null">No</th>
-        <th *tuiHead="'id'" tuiTh >ID</th>
-        <th *tuiHead="'name'" tuiTh>Name</th>
-        <th *tuiHead="'description'" tuiTh >Description</th>
-        <th *tuiHead="'price'" tuiTh >Price</th>
-        <th *tuiHead="'image'" tuiTh [sorter]="null">Image</th>
-        <th *tuiHead="'stock'" tuiTh >Stock</th>
-        <th *tuiHead="'detail'" tuiTh [sorter]="null">Detail</th>
-        <th *tuiHead="'delete'" tuiTh [sorter]="null"></th>
-      </tr>
+            <th *tuiHead="'numberOf'" tuiTh [sorter]="null">No</th>
+            <th *tuiHead="'id'" tuiTh>ID</th>
+            <th *tuiHead="'name'" tuiTh>Name</th>
+            <th *tuiHead="'description'" tuiTh>Description</th>
+            <th *tuiHead="'price'" tuiTh>Price</th>
+            <th *tuiHead="'image'" tuiTh [sorter]="null">Image</th>
+            <th *tuiHead="'stock'" tuiTh>Stock</th>
+            <th *tuiHead="'detail'" tuiTh [sorter]="null">Detail</th>
+            <th *tuiHead="'delete'" tuiTh [sorter]="null"></th>
+          </tr>
         </thead>
-        <tbody *tuiLet="productService.shopLists | tuiTableSort as sortedUsers"
-               tuiTbody
-               [data]="sortedUsers" >
+        <tbody *tuiLet="productService.shopLists | tuiTableSort as sortedUsers" tuiTbody [data]="sortedUsers">
           @for (item of sortedUsers; track item.id; let i = $index) {
           <tr tuiTr>
             <td *tuiCell="'numberOf'" tuiTd>
@@ -53,7 +51,8 @@
             </td>
             <td *tuiCell="'stock'" tuiTd>{{ item.stock }}</td>
             <td *tuiCell="'detail'" tuiTd>
-              <button icon="tuiIconEdit3Large" tuiIconButton type="button" appearance="accent" (click)="showDialog(item)">
+              <button icon="tuiIconEdit3Large" tuiIconButton type="button" appearance="accent"
+                (click)="showDialog(item)">
                 Update
               </button>
             </td>
